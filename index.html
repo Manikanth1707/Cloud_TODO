@@ -1,0 +1,775 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Awesome To-Do List</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: #333;
+            padding: 20px;
+        }
+
+        .quote-container {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 20px;
+            text-align: center;
+            color: white;
+            font-style: italic;
+            max-width: 600px;
+            width: 100%;
+        }
+
+        .container {
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 600px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        h1 {
+            color: #4a4a4a;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .view-tasks-button {
+            background-color: #667eea;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: all 0.3s ease;
+            margin-bottom: 20px;
+        }
+
+        .view-tasks-button:hover {
+            background-color: #764ba2;
+            transform: translateY(-2px);
+        }
+
+        h2 {
+            color: #4a4a4a;
+            margin-bottom: 15px;
+        }
+
+        #todo-form {
+            display: flex;
+            margin-bottom: 20px;
+        }
+
+        #task {
+            flex-grow: 1;
+            padding: 10px;
+            border: 2px solid #ddd;
+            border-radius: 50px 0 0 50px;
+            font-size: 1em;
+        }
+
+        #todo-form button {
+            background-color: #667eea;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 0 50px 50px 0;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background-color 0.3s ease;
+        }
+
+        #todo-form button:hover {
+            background-color: #764ba2;
+        }
+
+        #todo-list {
+            list-style-type: none;
+        }
+
+        #todo-list li {
+            background-color: #fff;
+            margin-bottom: 10px;
+            padding: 15px;
+            border-radius: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        #todo-list li:hover {
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transform: translateY(-2px);
+        }
+
+        #todo-list li span {
+            flex-grow: 1;
+            margin-right: 10px;
+        }
+
+        #todo-list li span.completed {
+            text-decoration: line-through;
+            color: #888;
+        }
+
+        #todo-list li button {
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+            font-size: 1.2em;
+            margin-left: 5px;
+            transition: color 0.3s ease;
+        }
+
+        #todo-list li button.delete {
+            color: #ff6b6b;
+        }
+
+        #todo-list li button.complete {
+            color: #51cf66;
+        }
+
+        #todo-list li button:hover {
+            opacity: 0.7;
+        }
+
+        .empty-list {
+            text-align: center;
+            color: #888;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <div class="quote-container" id="quote-container"></div>
+    <div class="container">
+        <header>
+            <h1>Awesome To-Do List</h1>
+        </header>
+        <button class="view-tasks-button" onclick="window.location.href='tasks.html'">View All Tasks</button>
+        <form id="todo-form">
+            <input type="text" id="task" name="task" placeholder="Enter a new task..." required>
+            <button type="submit"><i class="fas fa-plus"></i> Add</button>
+        </form>
+
+        <h2>Your Tasks</h2>
+        <ul id="todo-list">
+            <!-- Tasks will be loaded here -->
+        <!-- </ul>
+    </div>
+
+    <script>
+        const apiUrl = 'https://mels6949h5.execute-api.us-east-1.amazonaws.com/dev/todos';
+
+        const quotes = [
+            "The secret of getting ahead is getting started. - Mark Twain",
+            "Don't watch the clock; do what it does. Keep going. - Sam Levenson",
+            "The way to get started is to quit talking and begin doing. - Walt Disney",
+            "You don't have to be great to start, but you have to start to be great. - Zig Ziglar",
+            "Start where you are. Use what you have. Do what you can. - Arthur Ashe",
+            "The beginning is the most important part of the work. - Plato",
+            "Do the hard jobs first. The easy jobs will take care of themselves. - Dale Carnegie",
+            "Productivity is never an accident. It is always the result of a commitment to excellence, intelligent planning, and focused effort. - Paul J. Meyer",
+            "Your mind is for having ideas, not holding them. - David Allen",
+            "The key is not to prioritize what's on your schedule, but to schedule your priorities. - Stephen Covey"
+        ];
+
+        function loadTasks() {
+            fetch(apiUrl)
+                .then(response => response.json())
+                .then(data => {
+                    const taskList = document.getElementById('todo-list');
+                    taskList.innerHTML = ''; // Clear existing tasks
+
+                    if (data.length === 0) {
+                        taskList.innerHTML = '<li class="empty-list">No tasks yet. Add one above!</li>';
+                        return;
+                    }
+
+                    data.forEach(task => {
+                        const listItem = document.createElement('li');
+                        listItem.innerHTML = `
+                            <span class="${task.Status === 'Completed' ? 'completed' : ''}">${task.Task}</span>
+                            <div>
+                                <button class="complete" onclick="updateTask('${task.TodoID}')"><i class="fas fa-edit"></i></button>
+                    
+                            </div>
+                        `;
+                        taskList.appendChild(listItem);
+                    });
+                })
+                .catch(error => console.error('Error:', error));
+        }
+
+        function addTask(task) {
+            fetch(apiUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ task: task })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.Task) {
+                    document.getElementById('task').value = ''; // Clear input field
+                    loadTasks(); // Reload tasks after adding
+                } else {
+                    alert('Failed to add task');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Error adding task');
+            });
+        }
+
+        function deleteTask(todoID) {
+            fetch($apiUrl/$todoID, {
+                method: 'DELETE',
+            })
+            .then(response => response.json())
+            .then(data => {
+                loadTasks(); // Reload tasks after deletion
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Error deleting task');
+            });
+        }
+
+        function updateTask(todoID) {
+            fetch($apiUrl/$todoID, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ status: 'Completed' })
+            })
+            .then(response => response.json())
+            .then(data => {
+                loadTasks(); // Reload tasks after updating
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Error updating task');
+            });
+        }// Function to update a task status by calling the Lambda function via API Gateway
+
+
+// Load tasks and display them in the task list (this is an example)
+function loadTasks() {
+    const taskList = document.getElementById('task-list');
+    taskList.innerHTML = ''; // Clear existing tasks
+
+    // Example API call to get tasks
+    fetch('https://mels6949h5.execute-api.us-east-1.amazonaws.com/dev') // Replace with your actual endpoint
+        .then(response => response.json())
+        .then(data => {
+            data.forEach(task => {
+                const listItem = document.createElement('li');
+                listItem.innerHTML = `
+                    <span class="${task.Status === 'Completed' ? 'completed' : ''}">${task.Task}</span>
+                    <div>
+                        <button class="complete" onclick="updateTask('${task.TodoID}', 'Completed')"><i class="fas fa-edit"></i></button>
+                    </div>
+                `;
+                taskList.appendChild(listItem);
+            });
+        })
+        .catch(error => console.error('Error fetching tasks:', error));
+}
+
+// Call this function when the page loads to populate the tasks
+loadTasks();
+
+
+        function displayRandomQuote() {
+            const quoteContainer = document.getElementById('quote-container');
+            const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
+            quoteContainer.textContent = randomQuote;
+        }
+
+        function rotateQuotes() {
+            displayRandomQuote();
+            setInterval(displayRandomQuote, 10000); // Change quote every 10 seconds
+        }
+
+        // Event listener for form submission
+        document.getElementById('todo-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const task = document.getElementById('task').value;
+            addTask(task);
+        });
+
+        // Initialize the app
+        document.addEventListener('DOMContentLoaded', function() {
+            loadTasks();
+            rotateQuotes();
+        });
+    </script>
+</body>
+</html> --> -->
+
+<!-- <!DOCTYPE html>
+<html>
+<head>
+    <title>To-Do List</title>
+    <style>
+        /* Existing styles here */
+        .view-tasks-button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 10px 0;
+        }
+        .view-tasks-button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Welcome to To-Do's Application</h1>
+    </header>
+    <div class="container">
+        <button class="view-tasks-button" onclick="window.location.href='tasks.html'">View Total Tasks</button>
+        <h2>Create a New Task</h2>
+        <form id="todo-form">
+            <label for="task">Task:</label>
+            <input type="text" id="task" name="task" required>
+            <button type="submit">Add Task</button>
+        </form>
+
+        <h2>Tasks</h2>
+        <ul id="todo-list">
+            <!-- Tasks will be loaded here -->
+        <!-- </ul>
+    </div>
+
+    <script>
+        const apiUrl = 'https://mels6949h5.execute-api.us-east-1.amazonaws.com/dev/todos';
+
+        function loadTasks() {
+            fetch(apiUrl)
+                .then(response => response.json())
+                .then(data => {
+                    const taskList = document.getElementById('todo-list');
+                    taskList.innerHTML = ''; // Clear existing tasks
+
+                    data.forEach(task => {
+                        const listItem = document.createElement('li');
+                        listItem.innerHTML = `
+                            <span class="${task.Status === 'Completed' ? 'completed' : ''}">${task.Task}</span>
+                            <div>
+                                <button onclick="deleteTask('${task.TodoID}')">Delete</button>
+                                <button onclick="updateTask('${task.TodoID}')">Mark as Completed</button>
+                            </div>
+                        `;
+                        taskList.appendChild(listItem);
+                    });
+                })
+                .catch(error => console.error('Error:', error));
+        }
+
+        document.getElementById('todo-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const task = document.getElementById('task').value;
+
+            fetch(apiUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ task: task })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.Task) {
+                    alert('Task added successfully: ' + data.Task);
+                    document.getElementById('task').value = ''; // Clear input field
+                    loadTasks(); // Reload tasks after adding
+                } else {
+                    alert('Failed to add task');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Error adding task');
+            });
+        });
+
+        function deleteTask(todoID) {
+            fetch(`${apiUrl}/${todoID}`, {
+                method: 'DELETE',
+            })
+            .then(response => response.json())
+            .then(data => {
+                alert('Task deleted');
+                loadTasks(); // Reload tasks after deletion
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Error deleting task');
+            });
+        }
+
+        function updateTask(todoID) {
+            fetch(`${apiUrl}/${todoID}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ status: 'Completed' }) // Updating the status to 'Completed'
+            })
+            .then(response => response.json())
+            .then(data => {
+                alert('Task marked as completed');
+                loadTasks(); // Reload tasks after updating
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Error updating task');
+            });
+        }
+
+        loadTasks();
+    </script>
+</body>
+</html> --> -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Awesome To-Do List</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: #333;
+            padding: 20px;
+        }
+
+        .quote-container {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 20px;
+            text-align: center;
+            color: white;
+            font-style: italic;
+            max-width: 600px;
+            width: 100%;
+        }
+
+        .container {
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 600px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        h1 {
+            color: #4a4a4a;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .view-tasks-button {
+            background-color: #667eea;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: all 0.3s ease;
+            margin-bottom: 20px;
+        }
+
+        .view-tasks-button:hover {
+            background-color: #764ba2;
+            transform: translateY(-2px);
+        }
+
+        h2 {
+            color: #4a4a4a;
+            margin-bottom: 15px;
+        }
+
+        #todo-form {
+            display: flex;
+            margin-bottom: 20px;
+        }
+
+        #task {
+            flex-grow: 1;
+            padding: 10px;
+            border: 2px solid #ddd;
+            border-radius: 50px 0 0 50px;
+            font-size: 1em;
+        }
+
+        #todo-form button {
+            background-color: #667eea;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 0 50px 50px 0;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background-color 0.3s ease;
+        }
+
+        #todo-form button:hover {
+            background-color: #764ba2;
+        }
+
+        #todo-list {
+            list-style-type: none;
+        }
+
+        #todo-list li {
+            background-color: #fff;
+            margin-bottom: 10px;
+            padding: 15px;
+            border-radius: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        #todo-list li:hover {
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transform: translateY(-2px);
+        }
+
+        #todo-list li span {
+            flex-grow: 1;
+            margin-right: 10px;
+        }
+
+        #todo-list li span.completed {
+            text-decoration: line-through;
+            color: #888;
+        }
+
+        #todo-list li button {
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+            font-size: 1.2em;
+            margin-left: 5px;
+            transition: color 0.3s ease;
+        }
+
+        #todo-list li button.delete {
+            color: #ff6b6b;
+        }
+
+        #todo-list li button.complete {
+            color: #51cf66;
+        }
+
+        #todo-list li button:hover {
+            opacity: 0.7;
+        }
+
+        .empty-list {
+            text-align: center;
+            color: #888;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <div class="quote-container" id="quote-container"></div>
+    <div class="container">
+        <header>
+            <h1>Awesome To-Do List</h1>
+        </header>
+        <button class="view-tasks-button" onclick="window.location.href='tasks.html'">View All Tasks</button>
+        <form id="todo-form">
+            <input type="text" id="task" name="task" placeholder="Enter a new task..." required>
+            <button type="submit"><i class="fas fa-plus"></i> Add</button>
+        </form>
+
+        <h2>Your Tasks</h2>
+        <ul id="todo-list">
+            <!-- Tasks will be loaded here -->
+        </ul>
+    </div>
+
+    <script>
+        const apiUrl = 'https://mels6949h5.execute-api.us-east-1.amazonaws.com/dev/todos';
+
+        const quotes = [
+            "The secret of getting ahead is getting started. - Mark Twain",
+            "Don't watch the clock; do what it does. Keep going. - Sam Levenson",
+            "The way to get started is to quit talking and begin doing. - Walt Disney",
+            "You don't have to be great to start, but you have to start to be great. - Zig Ziglar",
+            "Start where you are. Use what you have. Do what you can. - Arthur Ashe",
+            "The beginning is the most important part of the work. - Plato",
+            "Do the hard jobs first. The easy jobs will take care of themselves. - Dale Carnegie",
+            "Productivity is never an accident. It is always the result of a commitment to excellence, intelligent planning, and focused effort. - Paul J. Meyer",
+            "Your mind is for having ideas, not holding them. - David Allen",
+            "The key is not to prioritize what's on your schedule, but to schedule your priorities. - Stephen Covey"
+        ];
+
+        function loadTasks() {
+            fetch(apiUrl)
+                .then(response => response.json())
+                .then(data => {
+                    const taskList = document.getElementById('todo-list');
+                    taskList.innerHTML = ''; // Clear existing tasks
+
+                    if (data.length === 0) {
+                        taskList.innerHTML = '<li class="empty-list">No tasks yet. Add one above!</li>';
+                        return;
+                    }
+
+                    data.forEach(task => {
+                        const listItem = document.createElement('li');
+                        listItem.innerHTML = `
+                            <span class="${task.Status === 'Completed' ? 'completed' : ''}">${task.Task}</span>
+                            <div>
+                                <button class="complete" onclick="updateTask('${task.TodoID}')"><i class="fas fa-edit"></i></button>
+                                <button class="delete" onclick="deleteTask('${task.TodoID}')"><i class="fas fa-trash-alt"></i></button>
+                            </div>
+                        `;
+                        taskList.appendChild(listItem);
+                    });
+                })
+                .catch(error => console.error('Error fetching tasks:', error));
+        }
+
+        function addTask(task) {
+            fetch(apiUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ task: task })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.Task) {
+                    document.getElementById('task').value = ''; // Clear input field
+                    loadTasks(); // Reload tasks after adding
+                } else {
+                    alert('Failed to add task');
+                }
+            })
+            .catch(error => {
+                console.error('Error adding task:', error);
+                alert('Error adding task');
+            });
+        }
+
+        function deleteTask(todoID) {
+            fetch(`${apiUrl}/${todoID}`, {
+                method: 'DELETE',
+            })
+            .then(response => response.json())
+            .then(data => {
+                loadTasks(); // Reload tasks after deletion
+            })
+            .catch(error => console.error('Error deleting task:', error));
+        }
+
+        function updateTask(todoID) {
+            fetch(`${apiUrl}/${todoID}`, {
+                method: 'PUT',
+            })
+            .then(response => response.json())
+            .then(data => {
+                loadTasks(); // Reload tasks after updating
+            })
+            .catch(error => console.error('Error updating task:', error));
+        }
+
+        document.getElementById('todo-form').addEventListener('submit', function (e) {
+            e.preventDefault();
+            const taskInput = document.getElementById('task');
+            const task = taskInput.value.trim();
+            if (task !== '') {
+                addTask(task);
+            }
+        });
+
+        function displayQuote() {
+            const randomIndex = Math.floor(Math.random() * quotes.length);
+            document.getElementById('quote-container').textContent = quotes[randomIndex];
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            loadTasks();
+            displayQuote();
+        });
+    </script>
+</body>
+</html>

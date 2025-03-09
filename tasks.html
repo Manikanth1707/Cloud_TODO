@@ -1,0 +1,335 @@
+<!-- <!DOCTYPE html>
+<html>
+<head>
+    <title>All Tasks</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #000000;
+            color: white;
+            padding: 10px 0;
+            text-align: center;
+        }
+        h1 {
+            margin: 0;
+        }
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            background-color: #fff;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 4px;
+            box-shadow: 0 0 5px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .completed {
+            text-decoration: line-through;
+            color: #9e9e9e;
+        }
+        .back-button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-bottom: 20px;
+        }
+        .back-button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>All Tasks</h1>
+    </header>
+    <div class="container">
+        <button class="back-button" onclick="window.location.href='index.html'">Back to Main Page</button>
+        <h2>Tasks</h2>
+        <ul id="tasks-list">
+            <!-- Tasks will be loaded here -->
+        <!-- </ul>
+    </div>
+
+    <script>
+        const apiUrl = 'https://mels6949h5.execute-api.us-east-1.amazonaws.com/dev/todos';
+
+        function loadAllTasks() {
+            fetch(apiUrl)
+                .then(response => response.json())
+                .then(data => {
+                    const taskList = document.getElementById('tasks-list');
+                    taskList.innerHTML = ''; // Clear existing tasks
+
+                    data.forEach(task => {
+                        const listItem = document.createElement('li');
+                        listItem.innerHTML = `
+                            <span class="${task.Status === 'Completed' ? 'completed' : ''}">${task.Task}</span>
+                        `;
+                        taskList.appendChild(listItem);
+                    });
+                })
+                .catch(error => console.error('Error:', error));
+        }
+
+        loadAllTasks();
+    </script>
+</body>
+</html> --> -->
+<!-- <!DOCTYPE html>
+<html>
+<head>
+    <title>All Tasks</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #fbc2eb 0%, #a6c0fe 100%);
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #333;
+            color: white;
+            padding: 15px 0;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        h1 {
+            margin: 0;
+            font-size: 2.5em;
+            font-weight: 700;
+        }
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        button.back-button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background-color 0.3s, transform 0.2s;
+            margin-bottom: 20px;
+        }
+        button.back-button:hover {
+            background-color: #0056b3;
+            transform: scale(1.05);
+        }
+        h2 {
+            font-size: 1.8em;
+            margin-bottom: 15px;
+            color: #333;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            background-color: #f8f9fa;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+        li:hover {
+            background-color: #e2e6ea;
+            transform: scale(1.02);
+        }
+        .completed {
+            text-decoration: line-through;
+            color: #6c757d;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>All Tasks</h1>
+    </header>
+    <div class="container">
+        <button class="back-button" onclick="window.location.href='index.html'">Back to Main Page</button>
+        <h2>Tasks</h2>
+        <ul id="tasks-list">
+            <!-- Tasks will be loaded here -->
+        <!-- </ul>
+    </div>
+
+    <script>
+        const apiUrl = 'https://mels6949h5.execute-api.us-east-1.amazonaws.com/dev/todos';
+
+        function loadAllTasks() {
+            fetch(apiUrl)
+                .then(response => response.json())
+                .then(data => {
+                    const taskList = document.getElementById('tasks-list');
+                    taskList.innerHTML = ''; // Clear existing tasks
+
+                    data.forEach(task => {
+                        const listItem = document.createElement('li');
+                        listItem.innerHTML = `
+                            <span class="${task.Status === 'Completed' ? 'completed' : ''}">${task.Task}</span>
+                        `;
+                        taskList.appendChild(listItem);
+                    });
+                })
+                .catch(error => console.error('Error:', error));
+        }
+
+        loadAllTasks();
+    </script>
+</body>
+</html> --> -->
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>All Tasks</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
+            color: #ecf0f1;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #1a2a6c;
+            color: #ecf0f1;
+            padding: 15px 0;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+        }
+        h1 {
+            margin: 0;
+            font-size: 2.5em;
+            font-weight: 700;
+        }
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+            background: #2f4f4f;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+        }
+        button.back-button {
+            background-color: #ff6f61;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background-color 0.3s, transform 0.2s;
+            margin-bottom: 20px;
+        }
+        button.back-button:hover {
+            background-color: #ff3f2f;
+            transform: scale(1.05);
+        }
+        h2 {
+            font-size: 1.8em;
+            margin-bottom: 15px;
+            color: #fdbb2d;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            background-color: #4a4a4a;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #ecf0f1;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+        li:hover {
+            background-color: #616161;
+            transform: scale(1.02);
+        }
+        .completed {
+            text-decoration: line-through;
+            color: #9e9e9e;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>All Tasks</h1>
+    </header>
+    <div class="container">
+        <button class="back-button" onclick="window.location.href='index.html'">Back to Main Page</button>
+        <h2>Tasks</h2>
+        <ul id="tasks-list">
+            <!-- Tasks will be loaded here -->
+        </ul>
+    </div>
+
+    <script>
+        const apiUrl = 'https://mels6949h5.execute-api.us-east-1.amazonaws.com/dev/todos';
+
+        function loadAllTasks() {
+            fetch(apiUrl)
+                .then(response => response.json())
+                .then(data => {
+                    const taskList = document.getElementById('tasks-list');
+                    taskList.innerHTML = ''; // Clear existing tasks
+
+                    data.forEach(task => {
+                        const listItem = document.createElement('li');
+                        listItem.innerHTML = `
+                            <span class="${task.Status === 'Completed' ? 'completed' : ''}">${task.Task}</span>
+                        `;
+                        taskList.appendChild(listItem);
+                    });
+                })
+                .catch(error => console.error('Error:', error));
+        }
+
+        loadAllTasks();
+    </script>
+</body>
+</html>
